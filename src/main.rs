@@ -72,12 +72,11 @@ enum ConsortiumDeed {
     ChangeCurrentTime(Time),
     EndScenario,
 }
-type ConsortiumDo = Box<dyn Fn(&System) -> Vec<ConsortiumDeed>>;
 struct System {
     agents: HashMap<AgentId, AgentState>,
     agreed: Vec<Agreement>,
     current: Time,
-    consortium_do: ConsortiumDo,
+    consortium_do: Box<dyn Fn(&System) -> Vec<ConsortiumDeed>>,
 }
 
 impl System {
